@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Inicio">
+   <children>
+      <Label layoutX="40.0" layoutY="23.0" text="Resumen General">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Pane layoutX="47.0" layoutY="68.0" prefHeight="90.0" prefWidth="300.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Artículos totales" />
+            <Label layoutX="14.0" layoutY="31.0" text="600">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="395.0" layoutY="68.0" prefHeight="90.0" prefWidth="300.0">
+         <children>
+            <Label layoutX="24.0" layoutY="18.0" text="Valor total del inventario" />
+            <Label layoutX="24.0" layoutY="35.0" text="S/. 60000">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="47.0" layoutY="175.0" prefHeight="330.0" prefWidth="648.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Alertas de Stock!">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="41.0" text="Los siguientes productos están a punto de agotarse o ya no estan disponibles. Se recomienda reabastercerlos pronto." />
+            <ScrollBar orientation="VERTICAL" prefHeight="240.0" prefWidth="14.0" visible="false" />
+            <VBox layoutX="14.0" layoutY="65.0" prefHeight="240.0" prefWidth="621.0">
+               <children>
+                  <Pane prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Mouse logitech G203">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="31.0" text="SKU: ABC-123" />
+                        <Label layoutX="480.0" layoutY="23.0" text="3 unidades" />
+                        <Label layoutX="548.0" layoutY="23.0" text="Poco Stock" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Teclado Kumara">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="31.0" text="SKU: ZXC-456" />
+                        <Label layoutX="480.0" layoutY="23.0" text="0 unidades" />
+                        <Label layoutX="548.0" layoutY="23.0" text="Agotado" />
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

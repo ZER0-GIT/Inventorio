@@ -1,0 +1,67 @@
+package controlador;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.event.ActionEvent;
+
+import java.io.IOException;
+
+public class Principal {
+
+    @FXML
+    private Button btnCerrarSesion;
+
+    @FXML
+    private Button btnInicio;
+
+    @FXML
+    private Button btnProductos;
+
+    @FXML
+    private Button btnReporte;
+
+    @FXML
+    private StackPane contenidoPrincipal;
+
+    @FXML
+    private Label lblTituloMenu;
+
+    @FXML
+    void handleInicio(ActionEvent event) {
+        lblTituloMenu.setText("Inicio");
+        try {
+            Parent view = FXMLLoader.load(getClass().getResource("/panel/Inicio.fxml"));
+            contenidoPrincipal.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleProductos(ActionEvent event) {
+        lblTituloMenu.setText("Gestión de Productos");
+        try {
+            Parent view = FXMLLoader.load(getClass().getResource("/panel/Producto.fxml"));
+            contenidoPrincipal.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleReporte(ActionEvent event) {
+        lblTituloMenu.setText("Reportes");
+        try {
+            Parent view = FXMLLoader.load(getClass().getResource("/panel/Reporte.fxml"));
+            contenidoPrincipal.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+
