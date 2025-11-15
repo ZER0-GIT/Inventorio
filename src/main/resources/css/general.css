@@ -1,0 +1,13 @@
+.letra{
+    -fx-font-family: ""Inter", "sans-serif"";
+    -fx-text-fill: white;
+}
+.letraError{
+-fx-font-family: ""Inter", "sans-serif"";
+    -fx-text-fill: red;
+}
+
+.fondo{
+    -fx-background-color: #101922;
+}
+

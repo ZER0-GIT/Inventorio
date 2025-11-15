@@ -1,5 +1,6 @@
 package controlador;
 
+import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import model.Usuario;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
@@ -39,14 +42,34 @@ public class Login {
     private Pane panelSesion;
 
     @FXML
-    private PasswordField passContrasena;
+    private PasswordField txtPassword;
 
     @FXML
     private TextField txtUsuario;
 
     @FXML
+    private Label lblError;
+
+    @FXML
     void IniciarSesion(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/panel/Principal.fxml"));
+        String usuarioIngresado = txtUsuario.getText();
+        String contrasenaIngresada = txtPassword.getText();
+
+        UsuarioDAO dao = new UsuarioDAO();
+        Usuario user = dao.buscarPorNombreUsuario(usuarioIngresado);
+
+        if (user == null) {
+            lblError.setText("Usuario no encontrado");
+            return;
+        }
+
+        boolean valido = BCrypt.checkpw(contrasenaIngresada, user.getContrasenaHash());
+
+        if (!valido) {
+            lblError.setText("Contraseña incorrecta");
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/Principal.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
