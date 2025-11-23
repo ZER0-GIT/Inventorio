@@ -1,4 +1,4 @@
-package controlador;
+package controller;
 
 import DAO.ProductoDAO;
 import javafx.event.ActionEvent;
@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Producto;
 
-public class AddProductoForm {
+public class  AddProductoForm {
 
     @FXML
     private Button btnAnadir;
@@ -40,6 +40,7 @@ public class AddProductoForm {
 
     @FXML
     void anadir(ActionEvent event) throws Exception {
+
         Producto producto = new Producto();
         producto.setNombre(txtNombre.getText());
         producto.setDescripcion(txtDescripcion.getText());

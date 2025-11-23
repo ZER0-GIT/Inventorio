@@ -1,4 +1,4 @@
-package controlador;
+package controller;
 
 import DAO.UsuarioDAO;
 import javafx.fxml.FXML;
@@ -69,7 +69,7 @@ public class Login {
             lblError.setText("Contraseña incorrecta");
             return;
         }
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/Principal.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Principal.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -1,4 +1,4 @@
-package controlador;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +38,7 @@ public class Principal implements Initializable {
     void handleInicio(ActionEvent event) {
         lblTituloMenu.setText("Inicio");
         try {
-            Parent view = FXMLLoader.load(getClass().getResource("/vista/Inicio.fxml"));
+            Parent view = FXMLLoader.load(getClass().getResource("/view/Inicio.fxml"));
             contenidoPrincipal.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,7 +49,7 @@ public class Principal implements Initializable {
     void handleProductos(ActionEvent event) {
         lblTituloMenu.setText("Gestión de Productos");
         try {
-            Parent view = FXMLLoader.load(getClass().getResource("/vista/Producto.fxml"));
+            Parent view = FXMLLoader.load(getClass().getResource("/view/Producto.fxml"));
             contenidoPrincipal.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class Principal implements Initializable {
     void handleReporte(ActionEvent event) {
         lblTituloMenu.setText("Reportes");
         try {
-            Parent view = FXMLLoader.load(getClass().getResource("/vista/Reporte.fxml"));
+            Parent view = FXMLLoader.load(getClass().getResource("/view/Reporte.fxml"));
             contenidoPrincipal.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class Principal implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTituloMenu.setText("Inicio");
         try {
-            Parent inicio = FXMLLoader.load(getClass().getResource("/vista/Inicio.fxml"));
+            Parent inicio = FXMLLoader.load(getClass().getResource("/view/Inicio.fxml"));
             contenidoPrincipal.getChildren().setAll(inicio);
         } catch (Exception e) {
             e.printStackTrace();

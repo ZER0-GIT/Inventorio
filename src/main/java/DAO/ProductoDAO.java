@@ -60,7 +60,6 @@ public class ProductoDAO {
             return stmt.executeUpdate() > 0;
         }
     }
-
     public List<Producto> listar() throws Exception {
         List<Producto> lista = new ArrayList<>();
         String sql = "SELECT * FROM productos";
@@ -85,31 +84,6 @@ public class ProductoDAO {
         }
         return lista;
     }
-
-    public Producto buscarID(int id) throws Exception {
-        String sql = "SELECT * FROM productos WHERE id = ?";
-
-        try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                Producto producto = new Producto();
-                producto.setId(rs.getInt("id"));
-                producto.setNombre(rs.getString("nombre"));
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setCategoriaId(rs.getInt("categoria_id"));
-                producto.setAlmacen(rs.getInt("almacen"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setPrecioCompra(rs.getDouble("precio_compra"));
-                producto.setPrecioVenta(rs.getDouble("precio_venta"));
-                return producto;
-            }
-        }
-        return null;
-    }
     public List<Producto> listarStockBajo() throws Exception {
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT * FROM productos WHERE stock < 5";
@@ -132,5 +106,32 @@ public class ProductoDAO {
             }
         }
         return productos;
+    }
+    public int totalProductos() throws Exception{
+        String sql = "SELECT COUNT(*) FROM productos";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()){
+                return rs.getInt(1);
+            }else{
+                return 0;
+            }
+        }
+    }
+
+    public double valorInventario() throws Exception{
+        String sql = "SELECT SUM(precio_venta * stock) AS total_valor FROM productos";
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()){
+                return rs.getDouble("total_valor");
+            }else{
+                return 0;
+            }
+        }
     }
 }

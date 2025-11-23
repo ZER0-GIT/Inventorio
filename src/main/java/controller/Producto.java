@@ -1,4 +1,4 @@
-package controlador;
+package controller;
 
 import DAO.ProductoDAO;
 import javafx.beans.property.SimpleStringProperty;
@@ -6,12 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.SVGPath;
@@ -19,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Producto {
 
@@ -50,6 +48,9 @@ public class Producto {
     private TableView<model.Producto> tablaProductos;
 
     @FXML
+    private TextField txtFiltrar;
+
+    @FXML
     public void initialize() throws Exception{
         configurarColumnas();
         ActualizarTabla();
@@ -57,7 +58,7 @@ public class Producto {
 
     @FXML
     void agregarProducto(ActionEvent event) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/AddProductoForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddProductoForm.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -112,7 +113,11 @@ public class Producto {
                 btnEliminar.setStyle("-fx-background-color: transparent;");
                 btnEditar.setOnAction(event -> {
                     model.Producto p = getTableView().getItems().get(getIndex());
-                    editarProducto(p);
+                    try {
+                        editarProducto(p);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 });
 
                 btnEliminar.setOnAction(event -> {
@@ -139,16 +144,66 @@ public class Producto {
         });
     }
 
-    private void editarProducto(model.Producto producto){
-        System.out.println("Producto modificado");
-    }
+    private void editarProducto(model.Producto producto) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditProductoForm.fxml"));
+        Parent root = loader.load();
 
-    private void eliminarProducto(model.Producto producto) throws Exception {
-        ProductoDAO pDAO = new ProductoDAO();
-        pDAO.eliminar(producto.getId());
+        EditProductoForm controller = loader.getController();
+        controller.setProducto(producto);
+
+        Stage stage = new Stage();
+        stage.setTitle("Modificar producto");
+        stage.setScene(new Scene(root));
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.showAndWait();
+
         ActualizarTabla();
     }
 
+    private void eliminarProducto(model.Producto producto) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("¿Estás seguro de eliminar este producto?");
+        alert.setContentText("Producto: " + producto.getNombre());
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            ProductoDAO pDAO = new ProductoDAO();
+            pDAO.eliminar(producto.getId());
+
+            ActualizarTabla();
+        }
+    }
+
+    @FXML
+    void filtrarProductos(ActionEvent event) throws Exception {
+        String filtro = txtFiltrar.getText().toLowerCase().trim();
+
+        if (filtro.isEmpty()){
+            ActualizarTabla();
+            return;
+        }
+        ProductoDAO dao = new ProductoDAO();
+
+        try {
+            List<model.Producto> lista = dao.listar();
+
+            List<model.Producto> filtrados = lista.stream()
+                    .filter(p ->
+                            String.valueOf(p.getId()).contains(filtro) ||
+                                    p.getNombre().toLowerCase().contains(filtro)
+                    )
+                    .toList();
+
+            tablaProductos.setItems(FXCollections.observableArrayList(filtrados));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //Iconos en SVG
     private SVGPath iconEditar() {

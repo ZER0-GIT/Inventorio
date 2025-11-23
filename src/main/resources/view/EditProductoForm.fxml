@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="519.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditProductoForm">
+   <children>
+      <Button fx:id="btnGuardar" layoutX="284.0" layoutY="338.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+      <Button fx:id="btnCancel" layoutX="193.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+      <TextField fx:id="txtNombre" layoutX="119.0" layoutY="76.0" />
+      <TextField fx:id="txtCategoria" layoutX="119.0" layoutY="117.0" />
+      <TextArea fx:id="txtDescripcion" layoutX="284.0" layoutY="105.0" prefHeight="197.0" prefWidth="200.0" />
+      <Label layoutX="29.0" layoutY="76.0" text="Nombre" />
+      <Label layoutX="29.0" layoutY="117.0" text="Categoria" />
+      <TextField fx:id="txtAlmacen" layoutX="119.0" layoutY="155.0" />
+      <TextField fx:id="txtStock" layoutX="119.0" layoutY="196.0" />
+      <Label layoutX="29.0" layoutY="155.0" text="Almacen" />
+      <Label layoutX="29.0" layoutY="196.0" text="Stock" />
+      <TextField fx:id="txtPrecioCompra" layoutX="119.0" layoutY="234.0" />
+      <TextField fx:id="txtPrecioVenta" layoutX="119.0" layoutY="275.0" />
+      <Label layoutX="29.0" layoutY="234.0" text="Precio compra" />
+      <Label layoutX="29.0" layoutY="275.0" text="Precio venta" />
+      <Label layoutX="353.0" layoutY="80.0" text="Descripción" />
+      <Label layoutX="169.0" layoutY="27.0" text="Editar Producto">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

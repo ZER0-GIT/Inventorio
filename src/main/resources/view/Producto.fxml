@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Producto">
+<AnchorPane prefHeight="550.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Producto">
    <children>
       <Label layoutX="40.0" layoutY="23.0" text="Catálogo de productos">
          <font>
@@ -16,8 +16,8 @@
          </font>
       </Label>
       <Label layoutX="40.0" layoutY="68.0" text="Añade, edita o elimna productos de tu inventario." />
-      <TextField layoutX="40.0" layoutY="98.0" prefHeight="25.0" prefWidth="382.0" text="Buscar por nombre o SKU" />
-      <Button fx:id="btnFiltrar" layoutX="433.0" layoutY="98.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Filtrar" />
+      <TextField fx:id="txtFiltrar" layoutX="40.0" layoutY="98.0" prefHeight="25.0" prefWidth="382.0" promptText="Buscar por SKU o nombre" />
+      <Button fx:id="btnFiltrar" layoutX="433.0" layoutY="98.0" mnemonicParsing="false" onAction="#filtrarProductos" prefHeight="25.0" prefWidth="92.0" text="Filtrar" />
       <Button fx:id="btnAgregar" layoutX="594.0" layoutY="98.0" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="25.0" prefWidth="116.0" text="Agregar Producto" />
       <TableView fx:id="tablaProductos" layoutX="40.0" layoutY="142.0" prefHeight="384.0" prefWidth="670.0">
         <columns>
