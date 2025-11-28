@@ -91,7 +91,7 @@
                   <Insets left="40.0" top="5.0" />
                </VBox.margin>
             </ComboBox>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Generar Reporte">
+            <Button fx:id="btnGenerarReporte" mnemonicParsing="false" onAction="#generarReporte" prefHeight="25.0" prefWidth="120.0" text="Generar Reporte">
                <VBox.margin>
                   <Insets left="40.0" top="30.0" />
                </VBox.margin>

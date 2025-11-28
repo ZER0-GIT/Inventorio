@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import model.Sesion;
 import model.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -69,6 +70,8 @@ public class Login {
             lblError.setText("Contraseña incorrecta");
             return;
         }
+
+        Sesion.getInstancia().iniciarSesion(user);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Principal.fxml"));
         Parent root = loader.load();
 

@@ -84,27 +84,32 @@ public class ProductoDAO {
         }
         return lista;
     }
-    public List<Producto> listarStockBajo() throws Exception {
+    public List<Producto> listarMenorStock(int limite) throws Exception {
         List<Producto> productos = new ArrayList<>();
-        String sql = "SELECT * FROM productos WHERE stock < 5";
+        String sql = "SELECT * FROM productos WHERE stock < ?";
 
         try (Connection conn = ConexionDB.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                productos.add(new Producto(
-                        rs.getInt("id"),
-                        rs.getString("nombre"),
-                        rs.getString("descripcion"),
-                        rs.getInt("categoria_id"),
-                        rs.getInt("almacen"),
-                        rs.getInt("stock"),
-                        rs.getDouble("precio_compra"),
-                        rs.getDouble("precio_venta")
-                ));
+            stmt.setInt(1, limite);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Producto p = new Producto(
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getString("descripcion"),
+                            rs.getInt("categoria_id"),
+                            rs.getInt("almacen"),
+                            rs.getInt("stock"),
+                            rs.getDouble("precio_compra"),
+                            rs.getDouble("precio_venta")
+                    );
+                    productos.add(p);
+                }
             }
         }
+
         return productos;
     }
     public int totalProductos() throws Exception{

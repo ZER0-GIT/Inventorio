@@ -84,7 +84,6 @@ public class Producto {
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("stock"));
         colPrecio.setCellValueFactory(new PropertyValueFactory<>("precioVenta"));
 
-        // Estado según stock
         ColEstado.setCellValueFactory(cellData -> {
             int stock = cellData.getValue().getStock();
             String estado;
